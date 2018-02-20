@@ -6,9 +6,9 @@ import sys
 
 def main():
     filename = sys.argv[1]
-    print filename
     cmd_str = "gcc -Wall %s.c -o bin/%s" % (filename, filename)
-    subprocess.call(cmd_str)
+    subprocess.call("mkdir -p bin", shell=True)
+    subprocess.call(cmd_str, shell=True)
     print "Compiled file %s." % (filename)
 
 
