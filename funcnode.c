@@ -16,7 +16,8 @@
 typedef enum
 {
         Type_Add,
-        Type_Int
+        Type_Int,
+        Type_Caller
 } Type;
 
 // Multi-typed node object
@@ -41,6 +42,12 @@ typedef struct
         FuncNode_BASE
 } AddNode;
 
+typedef struct
+{
+        FuncNode_BASE
+        struct FuncNode* params[1]; //max parameters
+} CallerNode;
+
 // Allocates and constructs an add node
 FuncNode* FuncNode_make_add(int lhi, int rhi)
 {
@@ -57,6 +64,14 @@ FuncNode* FuncNode_make_add(int lhi, int rhi)
         rhn->i = rhi;
         newnode->rhs = (FuncNode*)rhn;
         newnode->lhs = (FuncNode*)lhn;
+        return (FuncNode*)newnode;
+}
+
+FuncNode* FuncNode_make_call(void)
+{
+        CallerNode* newnode = malloc(sizeof(CallerNode));
+        FuncNode_NULLIFY(newnode);
+        newnode->type = Type_Caller;
         return (FuncNode*)newnode;
 }
 
