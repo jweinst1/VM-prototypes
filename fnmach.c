@@ -10,7 +10,7 @@
 
 #define FnMach_ALLOC calloc(1, sizeof(FnMach))
 
-#define FnMach_PCOUNT 3
+#define FnMach_PCOUNT 2
 #define FnMach_INS_COUNT 200
 
 // Function Machine Structure
@@ -21,6 +21,7 @@ typedef struct
         unsigned char ins[FnMach_INS_COUNT];
         int params[FnMach_PCOUNT];
         int retVal;
+        int recrusVal; // Used for recursive calcuations
 } FnMach;
 
 // Function to print debug format of function machine.
@@ -37,6 +38,14 @@ void FnMach_debug(FnMach* mach)
         }
         printf("Return Value: %d\n", mach->retVal);
         puts("_____________________");
+}
+
+// Loads arguments into paramter slots of functional machine.
+void FnMach_load_params(FnMach* mach, int* args)
+{
+        for (int i = 0; i < FnMach_PCOUNT; i++) {
+                mach->params[i] = args[i];
+        }
 }
 
 
