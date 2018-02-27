@@ -41,8 +41,8 @@ typedef struct
 {
         unsigned char ins[FnMach_INS_COUNT];
         int params[FnMach_PCOUNT];
+        struct FnMach* recChild;
         int retVal;
-        int recursVal; // Used for recursive calcuations
 } FnMach;
 
 // Function to print debug format of function machine.
@@ -58,7 +58,7 @@ void FnMach_debug(FnMach* mach)
                 printf("{Ins %d} : %u\n", j, mach->ins[j]);
         }
         printf("Return Value: %d\n", mach->retVal);
-        printf("Recurs Value: %d\n", mach->recursVal);
+        printf("Recursive Child At: %p\n", mach->recChild);
         puts("_____________________");
 }
 
